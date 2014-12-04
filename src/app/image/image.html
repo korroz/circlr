@@ -4,14 +4,17 @@
 
   <md-content class="md-padding">
     <div layout="column">
-      <md-content flex="48" class="md-whiteframe-z1 md-padding">Something this way comes..</md-content>
-      <md-content flex="48" class="md-whiteframe-z1 md-padding">Something this way comes..</md-content>
+      <md-content flex class="md-whiteframe-z1 md-padding">
+        <md-text-float label="Image url" ng-model="imageUrl"></md-text-float>
+        <img ng-src="{{imageUrl}}"/>
+      </md-content>
+      <md-content flex class="md-whiteframe-z1 md-padding">
+      </md-content>
     </div>
   </md-content>
 
   <footer>
     <md-toolbar layout="row" layout-align="center center">
-      <p>With ♥ from <a href="https://twitter.com/Swiip">@Swiip</a></p>
     </md-toolbar>
   </footer>
 
