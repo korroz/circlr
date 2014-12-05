@@ -24,7 +24,7 @@ angular.module('circlr')
             ctx.drawImage(img, 0, 0);
             var imgdata = ctx.getImageData(0, 0, canvas.width, canvas.height);
             $log.log("cr-cata image data:", { width: imgdata.width, height: imgdata.height, length: imgdata.data.length });
-            scope.analyse(imgdata);
+            scope.$apply(function (s) { s.analyse(imgdata); });
           };
           img.src = newUrl;
         });
