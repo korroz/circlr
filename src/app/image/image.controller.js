@@ -34,5 +34,6 @@ angular.module('circlr')
         pl.points.push({ x: x, y: y, val: computeSection(imgdata, sx.start, sy.start, sx.end, sy.end) });
       }
       $log.debug('analyse final:', pl);
+      $scope.payload = pl;
     };
   });
