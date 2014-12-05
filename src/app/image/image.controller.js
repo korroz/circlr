@@ -3,7 +3,7 @@
 angular.module('circlr')
   .controller('ImageCtrl', function ($scope, $log) {
     var settings = {
-      resolution: 10
+      resolution: 8
     };
     var divideDimension = function (dimension, resolution) {
       dimension -= 1; // make it index based
