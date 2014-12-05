@@ -3,7 +3,7 @@
 angular.module('circlr')
   .controller('ImageCtrl', function ($scope, $log) {
     var settings = {
-      resolution: 100
+      resolution: 10
     };
     var divideDimension = function (dimension, resolution) {
       dimension -= 1; // make it index based
@@ -28,7 +28,7 @@ angular.module('circlr')
       ag /= count;
       ab /= count;
 
-      return (ar + ag + ab) / 3 / 255 * 100;
+      return (ar + ag + ab) / 3 / 255;
     };
 
     $scope.imageUrl = 'http://media3.s-nbcnews.com/j/MSNBC/Components/Slideshows/_production/_archive/Entertainment/_Celebrity%20Slideshows/N-S/Pitt-Brad-090717/ss-131015-pitt-tease-01.blocks_desktop_medium.jpg';

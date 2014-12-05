@@ -26,7 +26,7 @@ angular.module('circlr')
             .attr('fill', '#ccc')
             .attr('cx', function (d) { return d.x * res + res / 2; })
             .attr('cy', function (d) { return d.y * res + res / 2; })
-            .attr('r', function (d) { return d.val; });
+            .attr('r', function (d) { return d.val * res / 2; });
           c.exit().remove();
         });
       }
