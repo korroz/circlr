@@ -23,7 +23,8 @@ angular.module('circlr')
             canvas.width = img.naturalWidth;
             ctx.drawImage(img, 0, 0);
             var imgdata = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            $log.log("cr-cata image data:", { height: imgdata.height, width: imgdata.width, length: imgdata.data.length });
+            $log.log("cr-cata image data:", { width: imgdata.width, height: imgdata.height, length: imgdata.data.length });
+            scope.analyse(imgdata);
           };
           img.src = newUrl;
         });
