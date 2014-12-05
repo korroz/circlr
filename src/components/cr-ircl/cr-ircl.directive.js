@@ -14,18 +14,18 @@ angular.module('circlr')
             return;
 
           var pl = newPayload;
+          var res = pl.resolution;
 
-          // TODO: have these computed based on payload
           svg.attr('width', 560)
             .attr('height', 420)
-            .attr('viewBox', '0 0 600 500');
+            .attr('viewBox', '0 0 ' + (res * pl.columns) + ' ' + (res * pl.rows));
 
           var c = svg.selectAll('circle').data(pl.points);
 
           c.enter().append('circle')
             .attr('fill', '#ccc')
-            .attr('cx', function (d) { return d.x * 100 + 50; })
-            .attr('cy', function (d) { return d.y * 100 + 50; })
+            .attr('cx', function (d) { return d.x * res + res / 2; })
+            .attr('cy', function (d) { return d.y * res + res / 2; })
             .attr('r', function (d) { return d.val; });
           c.exit().remove();
         });

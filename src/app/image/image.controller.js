@@ -31,16 +31,21 @@ angular.module('circlr')
       return (ar + ag + ab) / 3 / 255 * 100;
     };
 
+    $scope.imageUrl = 'http://media3.s-nbcnews.com/j/MSNBC/Components/Slideshows/_production/_archive/Entertainment/_Celebrity%20Slideshows/N-S/Pitt-Brad-090717/ss-131015-pitt-tease-01.blocks_desktop_medium.jpg';
+
     $scope.analyse = function (imgdata) {
       var pl = {
         orgWidth: imgdata.width,
         orgHeight: imgdata.height,
+        resolution: settings.resolution,
         points: []
       };
 
       var xSpans = divideDimension(pl.orgWidth, settings.resolution);
       var ySpans = divideDimension(pl.orgHeight, settings.resolution);
       $log.debug('analyse xSpans', xSpans, 'ySpans', ySpans);
+      pl.columns = xSpans.length;
+      pl.rows = ySpans.length;
 
       var sx, sy;
       for (var x = 0, y = 0; y < ySpans.length; x = (++x == xSpans.length) ? 0 : x, y = (x == 0) ? y + 1: y) {
