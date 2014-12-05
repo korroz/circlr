@@ -3,7 +3,7 @@
 angular.module('circlr')
   .controller('ImageCtrl', function ($scope, $log) {
     var settings = {
-      resolution: 16
+      resolution: 5000
     };
     var divideDimension = function (dimension, resolution) {
       dimension -= 1; // make it index based
@@ -37,12 +37,12 @@ angular.module('circlr')
       var pl = {
         orgWidth: imgdata.width,
         orgHeight: imgdata.height,
-        resolution: settings.resolution,
         points: []
       };
+      pl.resolution = Math.floor(Math.sqrt(pl.orgWidth * pl.orgHeight / settings.resolution));
 
-      var xSpans = divideDimension(pl.orgWidth, settings.resolution);
-      var ySpans = divideDimension(pl.orgHeight, settings.resolution);
+      var xSpans = divideDimension(pl.orgWidth, pl.resolution);
+      var ySpans = divideDimension(pl.orgHeight, pl.resolution);
       $log.debug('analyse xSpans', xSpans, 'ySpans', ySpans);
       pl.columns = xSpans.length;
       pl.rows = ySpans.length;
