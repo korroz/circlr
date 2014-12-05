@@ -6,10 +6,10 @@ angular.module('circlr')
     return {
       restrict: 'E',
       template: '<svg></svg>',
-      link: function (scope, el, attrs) {
+      link: function (scope, el) {
         var svg = d3.select(el[0].firstElementChild);
 
-        scope.$watch('payload', function (newPayload, oldPayload) {
+        scope.$watch('payload', function (newPayload) {
           if (!newPayload)
             return;
 

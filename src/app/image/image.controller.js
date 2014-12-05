@@ -16,7 +16,7 @@ angular.module('circlr')
       var ar, ag, ab, count, d = imgdata.data, i;
       ar = ag = ab = count = 0;
 
-      for (var x = x1, y = y1; y <= y2; x = (++x == x2) ? x1 : x, y = (x == x1) ? y + 1: y) {
+      for (var x = x1, y = y1; y <= y2; x = (++x === x2) ? x1 : x, y = (x === x1) ? y + 1: y) {
         i = (x * 4) + (y * imgdata.width * 4);
         ar += d[i + 0];
         ag += d[i + 1];
@@ -43,12 +43,11 @@ angular.module('circlr')
 
       var xSpans = divideDimension(pl.orgWidth, pl.resolution);
       var ySpans = divideDimension(pl.orgHeight, pl.resolution);
-      $log.debug('analyse xSpans', xSpans, 'ySpans', ySpans);
       pl.columns = xSpans.length;
       pl.rows = ySpans.length;
 
       var sx, sy;
-      for (var x = 0, y = 0; y < ySpans.length; x = (++x == xSpans.length) ? 0 : x, y = (x == 0) ? y + 1: y) {
+      for (var x = 0, y = 0; y < ySpans.length; x = (++x === xSpans.length) ? 0 : x, y = (x === 0) ? y + 1: y) {
         sx = xSpans[x];
         sy = ySpans[y];
         pl.points.push({ x: x, y: y, val: computeSection(imgdata, sx.start, sy.start, sx.end, sy.end) });

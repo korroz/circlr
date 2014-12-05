@@ -5,14 +5,14 @@ angular.module('circlr')
     return {
       restrict: 'E',
       template: '<canvas></canvas>',
-      link: function (scope, el, attrs) {
+      link: function (scope, el) {
         var canvas = el[0].firstElementChild;
         var ctx = canvas.getContext('2d');
         ctx.fillStyle = 'green';
         ctx.fillRect(10, 10, 100, 100);
 
-        scope.$watch('imageUrl', function (newUrl, oldUrl) {
-          $log.log("cr-cata watch imageUrl:", newUrl);
+        scope.$watch('imageUrl', function (newUrl) {
+          $log.debug('cr-cata watch imageUrl:', newUrl);
           if (!newUrl)
             return;
 
@@ -23,7 +23,7 @@ angular.module('circlr')
             canvas.width = img.naturalWidth;
             ctx.drawImage(img, 0, 0);
             var imgdata = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            $log.log("cr-cata image data:", { width: imgdata.width, height: imgdata.height, length: imgdata.data.length });
+            $log.debug('cr-cata image data:', { width: imgdata.width, height: imgdata.height, length: imgdata.data.length });
             scope.$apply(function (s) { s.analyse(imgdata); });
           };
           img.src = newUrl;
