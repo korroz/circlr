@@ -6,7 +6,6 @@ angular.module('circlr')
       restrict: 'E',
       template: '<canvas></canvas>',
       link: function (scope, el, attrs) {
-        $log.log('cr-cata element:', el);
         var canvas = el[0].firstElementChild;
         var ctx = canvas.getContext('2d');
         ctx.fillStyle = 'green';
@@ -18,10 +17,13 @@ angular.module('circlr')
             return;
 
           var img = new $window.Image();
+          img.crossOrigin = 'anonymous';
           img.onload = function () {
             canvas.height = img.naturalHeight;
             canvas.width = img.naturalWidth;
             ctx.drawImage(img, 0, 0);
+            var imgdata = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            $log.log("cr-cata image data:", { height: imgdata.height, width: imgdata.width, length: imgdata.data.length });
           };
           img.src = newUrl;
         });
