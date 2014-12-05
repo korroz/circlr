@@ -13,7 +13,22 @@ angular.module('circlr')
       return sections;
     };
     var computeSection = function (imgdata, x1, y1, x2, y2) {
-      return 50;  // TODO: Do some actual computing
+      var ar, ag, ab, count, d = imgdata.data, i;
+      ar = ag = ab = count = 0;
+
+      for (var x = x1, y = y1; y <= y2; x = (++x == x2) ? x1 : x, y = (x == x1) ? y + 1: y) {
+        i = (x * 4) + (y * imgdata.width * 4);
+        ar += d[i + 0];
+        ag += d[i + 1];
+        ab += d[i + 2];
+        count++;
+      }
+
+      ar /= count;
+      ag /= count;
+      ab /= count;
+
+      return (ar + ag + ab) / 3 / 255 * 100;
     };
 
     $scope.analyse = function (imgdata) {
