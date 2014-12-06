@@ -2,18 +2,15 @@
 
   <header ng-include="'components/navbar/navbar.html'"></header>
 
-  <md-content class="md-padding">
-    <div layout="column">
-      <md-content flex class="md-whiteframe-z1 md-padding">
-        <md-text-float label="Image url" ng-model="imageUrl"></md-text-float>
-        <img crossorigin="anonymous" ng-src="{{imageUrl}}"/>
-        <cr-cata></cr-cata>
-      </md-content>
-      <md-content flex md-theme="light-blue-dark" class="md-whiteframe-z1 md-padding">
-        <cr-ircl></cr-ircl>
-      </md-content>
-    </div>
-  </md-content>
+  <section layout="row" layout-padding>
+    <md-content flex>
+      <md-text-float label="Image url" ng-model="imageUrl" class="full-length"></md-text-float>
+      <cr-cata></cr-cata>
+    </md-content>
+    <md-content flex md-theme="light-blue-dark" layout="vertical" layout-align="start center">
+      <cr-ircl></cr-ircl>
+    </md-content>
+  </section>
 
   <footer>
     <md-toolbar layout="row" layout-align="center center">

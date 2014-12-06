@@ -4,7 +4,7 @@ angular.module('circlr')
   .directive('crCata', function ($log, $window) {
     return {
       restrict: 'E',
-      template: '<canvas></canvas>',
+      template: '<canvas style="max-width: 600px; max-height: 600px"></canvas>',
       link: function (scope, el) {
         var canvas = el[0].firstElementChild;
         var ctx = canvas.getContext('2d');
