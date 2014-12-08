@@ -14,20 +14,19 @@ angular.module('circlr')
             return;
 
           var pl = newPayload;
-          var res = pl.resolution;
 
           svg.attr('width', 600)
             .attr('height', 600)
-            .attr('viewBox', '0 0 ' + (res * pl.columns) + ' ' + (res * pl.rows));
+            .attr('viewBox', '0 0 ' + pl.columns + ' ' + pl.rows);
 
-          var c = svg.selectAll('circle').data(pl.points);
+          var c = svg.selectAll('circle').data(pl.points.filter(function (p) { return p.val > 0.16; }));
 
           c.enter().append('circle')
             .attr('fill', '#fff');
 
-          c.attr('cx', function (d) { return d.x * res + res / 2; })
-            .attr('cy', function (d) { return d.y * res + res / 2; })
-            .attr('r', function (d) { return (d.val * 0.8) * res / 2 * 1.3; });
+          c.attr('cx', function (d) { return d.x + 0.5; })
+            .attr('cy', function (d) { return d.y + 0.5; })
+            .attr('r', function (d) { return d.val * 0.5; });
 
           c.exit().remove();
         });
