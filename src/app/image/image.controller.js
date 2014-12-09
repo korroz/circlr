@@ -2,9 +2,11 @@
 
 angular.module('circlr')
   .controller('ImageCtrl', function ($scope, $log) {
-    var settings = {
-      circles: 5000
+    var settings = $scope.settings = {
+      circles: 5000,
+      cutoff: 0.16
     };
+    var latestImg;
     var divideDimension = function (dimension, resolution) {
       dimension -= 1; // make it index based
       var sections = [];
@@ -28,18 +30,22 @@ angular.module('circlr')
       ag /= count;
       ab /= count;
 
+      //l = d3.rgb(ar, ag, ab).hsl().l;
+
       return (ar + ag + ab) / 3 / 255;
     };
 
     $scope.imageUrl = 'http://media3.s-nbcnews.com/j/MSNBC/Components/Slideshows/_production/_archive/Entertainment/_Celebrity%20Slideshows/N-S/Pitt-Brad-090717/ss-131015-pitt-tease-01.blocks_desktop_medium.jpg';
 
     $scope.analyse = function (imgdata) {
+      latestImg = imgdata;
       var pl = {
         orgWidth: imgdata.width,
         orgHeight: imgdata.height,
-        points: []
+        points: [],
+        settings: angular.copy(settings)
       };
-      pl.resolution = Math.floor(Math.sqrt(pl.orgWidth * pl.orgHeight / settings.circles));
+      pl.resolution = Math.ceil(Math.sqrt(pl.orgWidth * pl.orgHeight / settings.circles));
 
       var xSpans = divideDimension(pl.orgWidth, pl.resolution);
       var ySpans = divideDimension(pl.orgHeight, pl.resolution);
@@ -55,4 +61,9 @@ angular.module('circlr')
       $log.debug('analyse final:', pl);
       $scope.payload = pl;
     };
+
+    $scope.$watch('settings', function () {
+      if (settings && latestImg)
+        $scope.analyse(latestImg);
+    }, true);
   });

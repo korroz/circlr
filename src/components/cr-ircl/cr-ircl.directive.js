@@ -19,7 +19,7 @@ angular.module('circlr')
             .attr('height', 600)
             .attr('viewBox', '0 0 ' + pl.columns + ' ' + pl.rows);
 
-          var c = svg.selectAll('circle').data(pl.points.filter(function (p) { return p.val > 0.16; }));
+          var c = svg.selectAll('circle').data(pl.points.filter(function (p) { return p.val > pl.settings.cutoff; }));
 
           c.enter().append('circle')
             .attr('fill', '#fff');
