@@ -30,9 +30,9 @@ angular.module('circlr')
       ag /= count;
       ab /= count;
 
-      //l = d3.rgb(ar, ag, ab).hsl().l;
+      var hsl = d3.rgb(ar, ag, ab).hsl();
 
-      return (ar + ag + ab) / 3 / 255;
+      return { h: hsl.h, s: hsl.s, l: hsl.l }; //(ar + ag + ab) / 3 / 255;
     };
 
     $scope.imageUrl = 'http://media3.s-nbcnews.com/j/MSNBC/Components/Slideshows/_production/_archive/Entertainment/_Celebrity%20Slideshows/N-S/Pitt-Brad-090717/ss-131015-pitt-tease-01.blocks_desktop_medium.jpg';
