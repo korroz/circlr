@@ -27,9 +27,12 @@ angular.module('crCirclr')
 
       var hsl = d3.rgb(ar, ag, ab).hsl();
 
-      return { h: hsl.h, s: hsl.s, l: hsl.l }; //(ar + ag + ab) / 3 / 255;
+      return { h: hsl.h, s: hsl.s, l: hsl.l, color: hsl.toString() }; //(ar + ag + ab) / 3 / 255;
     };
 
+    this.resolution = function (w, h, maxCircles) {
+      return Math.ceil(Math.sqrt(w * h / maxCircles));
+    };
     this.analyse = function (imgdata, settings) {
       var pl = {
         orgWidth: imgdata.width,
@@ -37,10 +40,9 @@ angular.module('crCirclr')
         points: [],
         settings: angular.copy(settings)
       };
-      pl.resolution = Math.ceil(Math.sqrt(pl.orgWidth * pl.orgHeight / settings.circles));
 
-      var xSpans = divideDimension(pl.orgWidth, pl.resolution);
-      var ySpans = divideDimension(pl.orgHeight, pl.resolution);
+      var xSpans = divideDimension(pl.orgWidth, pl.settings.resolution);
+      var ySpans = divideDimension(pl.orgHeight, pl.settings.resolution);
       pl.columns = xSpans.length;
       pl.rows = ySpans.length;
 
@@ -48,7 +50,7 @@ angular.module('crCirclr')
       for (var x = 0, y = 0; y < ySpans.length; x = (++x === xSpans.length) ? 0 : x, y = (x === 0) ? y + 1: y) {
         sx = xSpans[x];
         sy = ySpans[y];
-        pl.points.push({ x: x, y: y, val: computeSection(imgdata, sx.start, sy.start, sx.end, sy.end) });
+        pl.points.push(angular.extend({ x: x, y: y }, computeSection(imgdata, sx.start, sy.start, sx.end, sy.end)));
       }
       return pl;
     };
