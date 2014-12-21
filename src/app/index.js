@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('circlr', ['ngRoute', 'ngMaterial'])
+angular.module('circlr', ['ngRoute', 'ngMaterial', 'crCirclr'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
