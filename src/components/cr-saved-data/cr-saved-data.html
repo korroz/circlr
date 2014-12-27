@@ -1,0 +1,12 @@
+<md-toolbar class="md-accent" layout="row" layout-align="start center" style="padding: 0 10px">
+  <md-button class="md-raised" ng-click="addPayload()" aria-label="Add payload">Add payload</md-button>
+</md-toolbar>
+<md-list>
+  <md-item ng-hide="series.length > 0">
+    No payloads added yet.
+  </md-item>
+  <md-item ng-repeat="pl in series">
+    <span>{{ $index }}</span> <span>{{ pl.orgWidth }} x {{ pl.orgHeight }}</span>
+    <md-button class="md-raised md-warn" aria-label="Delete" ng-click="deletePayload($index)">Delete</md-button>
+  </md-item>
+</md-list>
