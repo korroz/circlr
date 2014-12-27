@@ -7,7 +7,7 @@ angular.module('circlr')
       templateUrl: 'components/cr-saved-data/cr-saved-data.html',
       scope: { payload: '=' },
       controller: function ($scope, $window) {
-        var storage = $window.sessionStorage;
+        var storage = $window.localStorage;
         var JSON = $window.JSON;
         var serieKey = 'circlrSeries';
         var series = [];

@@ -11,6 +11,10 @@ angular.module('circlr', ['ngRoute', 'ngMaterial', 'crCirclr'])
         templateUrl: 'app/image/image.html',
         controller: 'ImageCtrl'
       })
+      .when('/player', {
+        templateUrl: 'app/player/player.html',
+        controller: 'PlayerCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
