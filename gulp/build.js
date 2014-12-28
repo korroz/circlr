@@ -6,6 +6,8 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
+var htmlToInject = ['src/index.html', 'src/player.html'];
+
 gulp.task('styles', ['wiredep', 'injector:css:preprocessor'], function () {
   return gulp.src(['src/app/index.less', 'src/app/vendor.less'])
     .pipe($.less({
@@ -28,7 +30,7 @@ gulp.task('injector:css:preprocessor', function () {
     .pipe($.inject(gulp.src([
         'src/{app,components}/**/*.less',
         '!src/app/index.less',
-        '!src/app/vendor.less' 
+        '!src/app/vendor.less'
       ], {read: false}), {
       transform: function(filePath) {
         filePath = filePath.replace('src/app/', '');
@@ -43,7 +45,7 @@ gulp.task('injector:css:preprocessor', function () {
 });
 
 gulp.task('injector:css', ['styles'], function () {
-  return gulp.src('src/index.html')
+  return gulp.src(htmlToInject)
     .pipe($.inject(gulp.src([
         '.tmp/{app,components}/**/*.css',
         '!.tmp/app/vendor.css'
@@ -61,7 +63,7 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('injector:js', ['jshint', 'injector:css'], function () {
-  return gulp.src('src/index.html')
+  return gulp.src(htmlToInject)
     .pipe($.inject(gulp.src([
         'src/{app,components}/**/*.js',
         '!src/{app,components}/**/*.spec.js',
