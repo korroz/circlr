@@ -4,7 +4,8 @@ angular.module('crCirclr')
   .directive('crPlayer', function (d3, $timeout, $window, $log) {
     return {
       restrict: 'E',
-      templateUrl: 'components/cr-circlr/cr-player/cr-player.html',
+      //templateUrl: 'components/cr-circlr/cr-player/cr-player.html',
+      template: '<svg width="800" height="600"></svg>',
       scope: {},
       controller: function ($scope) {
         $scope.series = $window.JSON.parse($window.localStorage.getItem('circlrSeries'));
