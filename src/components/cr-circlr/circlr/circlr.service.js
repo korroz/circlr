@@ -46,11 +46,13 @@ angular.module('crCirclr')
       pl.columns = xSpans.length;
       pl.rows = ySpans.length;
 
-      var sx, sy;
+      var sx, sy, point;
       for (var x = 0, y = 0; y < ySpans.length; x = (++x === xSpans.length) ? 0 : x, y = (x === 0) ? y + 1: y) {
         sx = xSpans[x];
         sy = ySpans[y];
-        pl.points.push(angular.extend({ x: x, y: y }, computeSection(imgdata, sx.start, sy.start, sx.end, sy.end)));
+        point = angular.extend({ x: x, y: y }, computeSection(imgdata, sx.start, sy.start, sx.end, sy.end));
+        if (point.l > pl.settings.cutoff)
+          pl.points.push(point);
       }
       return pl;
     };
