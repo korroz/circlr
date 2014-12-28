@@ -6,7 +6,7 @@ angular.module('circlr')
       restrict: 'E',
       templateUrl: 'components/cr-saved-data/cr-saved-data.html',
       scope: { payload: '=' },
-      controller: function ($scope, $window) {
+      controller: function ($scope, $window, $mdDialog) {
         var storage = $window.localStorage;
         var JSON = $window.JSON;
         var serieKey = 'circlrSeries';
@@ -28,6 +28,12 @@ angular.module('circlr')
         $scope.deletePayload = function (i) {
           series.splice(i, 1);
           store();
+        };
+        $scope.giefPayload = function ($event) {
+          $mdDialog.show({
+            targetEvent: $event,
+            template: '<md-dialog><textarea>' + JSON.stringify(series) + '</textarea></md-dialog>'
+          });
         };
       }
     };
