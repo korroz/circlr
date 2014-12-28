@@ -1,14 +1,19 @@
 'use strict';
 
 angular.module('crCirclr')
-  .directive('crPlayer', function (d3, $timeout, $window, $log) {
+  .directive('crPlayer', function (d3, $timeout, $window, $document, $log) {
     return {
       restrict: 'E',
       //templateUrl: 'components/cr-circlr/cr-player/cr-player.html',
       template: '<svg width="800" height="600"></svg>',
-      scope: {},
+      scope: {
+        playJsonId: '@'
+      },
       controller: function ($scope) {
-        $scope.series = $window.JSON.parse($window.localStorage.getItem('circlrSeries'));
+        if ($scope.playJsonId)
+          $scope.series = $window.JSON.parse($document[0].getElementById($scope.playJsonId).innerHTML);
+        else
+          $scope.series = $window.JSON.parse($window.localStorage.getItem('circlrSeries'));
       },
       link: function (scope, el) {
         var svg = d3.select(el[0].firstElementChild);
